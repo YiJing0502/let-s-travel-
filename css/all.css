@@ -16,7 +16,7 @@ img {
   max-width: 100%;
   display: block;
 }
-
+/* 去除掉ul樣式 */
 ul {
   list-style-type: none;
 }

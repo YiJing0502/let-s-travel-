@@ -1,5 +1,3 @@
-const ticketCardArea = document.querySelector('.ticketCard-area');
-console.log(ticketCardArea);
 let data = [
     {
       "id": 0,
@@ -32,6 +30,8 @@ let data = [
       "rate": 7
     }
   ];
+// 動態渲染資料功能
+const ticketCardArea = document.querySelector('.ticketCard-area');
 let str = '';
 data.forEach(function(element){
   console.log(element.rate);
@@ -66,5 +66,4 @@ data.forEach(function(element){
       </li>`;
   str += li;
 });
-
 ticketCardArea.innerHTML = str;
