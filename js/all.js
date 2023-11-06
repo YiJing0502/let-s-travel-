@@ -134,18 +134,24 @@ function addTicket() {
   // 套票金額防呆
   if (ticketPrice.value === '') {
     ticketPriceMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else if (ticketPrice.value < 0) {
+    ticketPriceMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>金額最小為0</span>`;
   } else {
     ticketPriceMessage.innerHTML = '';
   };
   // 套票組數防呆
   if (ticketNum.value === '') {
     ticketNumMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else if (ticketNum.value <= 0) {
+    ticketNumMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>組數必須大於1</span>`;
   } else {
     ticketNumMessage.innerHTML = '';
   };
   // 套票星級防呆
   if (ticketRate.value === '') {
     ticketRateMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else if (ticketRate.value <= 0 || ticketRate.value > 10) {
+    ticketRateMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>套票星級限定在1到10之間</span>`;
   } else {
     ticketRateMessage.innerHTML = '';
   };
@@ -179,6 +185,7 @@ function addTicket() {
     ticketRate.value = '';
   };
 };
+// 地區篩選功能
 let regionSearchDataNum = 0;
 const regionSearch = document.querySelector('.regionSearch');
 regionSearch.addEventListener('change', selectRegion);
