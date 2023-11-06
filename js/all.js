@@ -30,56 +30,67 @@ let data = [
       "rate": 7
     }
   ];
+// 顯示搜尋幾筆函式
+const searchResultText = document.querySelector('#searchResult-text');
+function showSearchResultText() {
+  searchResultText.textContent = `本次搜尋共 ${data.length} 筆資料`;
+};
 // 動態渲染資料功能
 const ticketCardArea = document.querySelector('.ticketCard-area');
 let str = '';
-data.forEach(function(element){
-  let li = `<li class="ticketCard">
-        <div class="ticketCard-img">
-          <a href="#">
-            <img src="${element.imgUrl}"
-              alt="">
-          </a>
-          <div class="ticketCard-region">${element.area}</div>
-          <div class="ticketCard-rank">${element.rate}</div>
-        </div>
-        <div class="ticketCard-content">
-          <div>
-            <h3>
-              <a href="#" class="ticketCard-name">${element.name}</a>
-            </h3>
-            <p class="ticketCard-description">
-              ${element.description}
-            </p>
+// 初始化資料函式
+function init() {
+  str = '';
+  data.forEach(function(element){
+    let li = `<li class="ticketCard">
+          <div class="ticketCard-img">
+            <a href="#">
+              <img src="${element.imgUrl}"
+                alt="">
+            </a>
+            <div class="ticketCard-region">${element.area}</div>
+            <div class="ticketCard-rank">${element.rate}</div>
           </div>
-          <div class="ticketCard-info">
-            <p class="ticketCard-num">
-              <span><i class="fas fa-exclamation-circle"></i></span>
-              剩下最後 <span id="ticketCard-num"> ${element.group} </span> 組
-            </p>
-            <p class="ticketCard-price">
-              TWD <span id="ticketCard-price">$${element.price}</span>
-            </p>
+          <div class="ticketCard-content">
+            <div>
+              <h3>
+                <a href="#" class="ticketCard-name">${element.name}</a>
+              </h3>
+              <p class="ticketCard-description">
+                ${element.description}
+              </p>
+            </div>
+            <div class="ticketCard-info">
+              <p class="ticketCard-num">
+                <span><i class="fas fa-exclamation-circle"></i></span>
+                剩下最後 <span id="ticketCard-num"> ${element.group} </span> 組
+              </p>
+              <p class="ticketCard-price">
+                TWD <span id="ticketCard-price">$${element.price}</span>
+              </p>
+            </div>
           </div>
-        </div>
-      </li>`;
-  str += li;
-});
-ticketCardArea.innerHTML = str;
+        </li>`;
+    str += li;
+  });
+  ticketCardArea.innerHTML = str;
+  showSearchResultText();
+}
+init();
 // 新增套票功能
-// 套票名稱input
+// 套票名稱input o
 const ticketName = document.querySelector('#ticketName');
-// 圖片網址input
+// 圖片網址input o
 const ticketImgUrl = document.querySelector('#ticketImgUrl');
-// 景點地區select
+// 景點地區select o
 const ticketRegion = document.querySelector('#ticketRegion');
-// 套票金額input
+// 套票金額input o
 const ticketPrice = document.querySelector('#ticketPrice');
-// 套票組數input
+// 套票組數input o
 const ticketNum = document.querySelector('#ticketNum');
-// 套票星級input
+// 套票星級input o
 const ticketRate = document.querySelector('#ticketRate');
-// 套票描述input
+// 套票描述input o
 const ticketDescription = document.querySelector('#ticketDescription');
 // 新增套票button
 const addTicketBtn = document.querySelector('.addTicket-btn');
@@ -145,6 +156,72 @@ function addTicket() {
     ticketDescriptionMessage.innerHTML = '';
   };
   // 2. 資料建立 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  // let obj = {};
-
+  if(ticketName.value && ticketImgUrl.value && ticketRegion.value && ticketDescription.value && ticketNum.value && ticketPrice.value && ticketRate.value) {
+    let obj = {};
+    obj.id = Math.max(0,...data.map((x) => x.id)) + 1;
+    obj.name = ticketName.value;
+    obj.imgUrl = ticketImgUrl.value;
+    obj.area = ticketRegion.value;
+    obj.description = ticketDescription.value;
+    obj.group = ticketNum.value;
+    obj.price = ticketPrice.value;
+    obj.rate = ticketRate.value;
+    data.push(obj);
+    // 初始化函式，在畫面上重新渲染將新資料新增上去
+    init();
+    // 將輸入框清空
+    ticketName.value = '';
+    ticketImgUrl.value = '';
+    ticketRegion.value = '';
+    ticketDescription.value = '';
+    ticketNum.value = '';
+    ticketPrice.value = '';
+    ticketRate.value = '';
+  };
+};
+let regionSearchDataNum = 0;
+const regionSearch = document.querySelector('.regionSearch');
+regionSearch.addEventListener('change', selectRegion);
+function selectRegion() {
+  regionSearchDataNum = 0;
+  str = '';
+  data.forEach(function(element){
+    if(regionSearch.value === element.area){
+      regionSearchDataNum++;
+      let li = `<li class="ticketCard">
+            <div class="ticketCard-img">
+              <a href="#">
+                <img src="${element.imgUrl}"
+                  alt="">
+              </a>
+              <div class="ticketCard-region">${element.area}</div>
+              <div class="ticketCard-rank">${element.rate}</div>
+            </div>
+            <div class="ticketCard-content">
+              <div>
+                <h3>
+                  <a href="#" class="ticketCard-name">${element.name}</a>
+                </h3>
+                <p class="ticketCard-description">
+                  ${element.description}
+                </p>
+              </div>
+              <div class="ticketCard-info">
+                <p class="ticketCard-num">
+                  <span><i class="fas fa-exclamation-circle"></i></span>
+                  剩下最後 <span id="ticketCard-num"> ${element.group} </span> 組
+                </p>
+                <p class="ticketCard-price">
+                  TWD <span id="ticketCard-price">$${element.price}</span>
+                </p>
+              </div>
+            </div>
+          </li>`;
+      str += li;
+      searchResultText.textContent = `本次搜尋共 ${regionSearchDataNum} 筆資料`;
+    }else if(regionSearch.value === ''){
+      init();
+    };
+  });
+  ticketCardArea.innerHTML = str;
 };
