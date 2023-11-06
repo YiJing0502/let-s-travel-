@@ -1,3 +1,5 @@
+const ticketCardArea = document.querySelector('.ticketCard-area');
+console.log(ticketCardArea);
 let data = [
     {
       "id": 0,
@@ -30,3 +32,39 @@ let data = [
       "rate": 7
     }
   ];
+let str = '';
+data.forEach(function(element){
+  console.log(element.rate);
+  let li = `<li class="ticketCard">
+        <div class="ticketCard-img">
+          <a href="#">
+            <img src="${element.imgUrl}"
+              alt="">
+          </a>
+          <div class="ticketCard-region">${element.area}</div>
+          <div class="ticketCard-rank">${element.rate}</div>
+        </div>
+        <div class="ticketCard-content">
+          <div>
+            <h3>
+              <a href="#" class="ticketCard-name">${element.name}</a>
+            </h3>
+            <p class="ticketCard-description">
+              ${element.description}
+            </p>
+          </div>
+          <div class="ticketCard-info">
+            <p class="ticketCard-num">
+              <span><i class="fas fa-exclamation-circle"></i></span>
+              剩下最後 <span id="ticketCard-num"> ${element.group} </span> 組
+            </p>
+            <p class="ticketCard-price">
+              TWD <span id="ticketCard-price">$${element.price}</span>
+            </p>
+          </div>
+        </div>
+      </li>`;
+  str += li;
+});
+
+ticketCardArea.innerHTML = str;
