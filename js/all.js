@@ -34,7 +34,6 @@ let data = [
 const ticketCardArea = document.querySelector('.ticketCard-area');
 let str = '';
 data.forEach(function(element){
-  console.log(element.rate);
   let li = `<li class="ticketCard">
         <div class="ticketCard-img">
           <a href="#">
@@ -67,3 +66,85 @@ data.forEach(function(element){
   str += li;
 });
 ticketCardArea.innerHTML = str;
+// 新增套票功能
+// 套票名稱input
+const ticketName = document.querySelector('#ticketName');
+// 圖片網址input
+const ticketImgUrl = document.querySelector('#ticketImgUrl');
+// 景點地區select
+const ticketRegion = document.querySelector('#ticketRegion');
+// 套票金額input
+const ticketPrice = document.querySelector('#ticketPrice');
+// 套票組數input
+const ticketNum = document.querySelector('#ticketNum');
+// 套票星級input
+const ticketRate = document.querySelector('#ticketRate');
+// 套票描述input
+const ticketDescription = document.querySelector('#ticketDescription');
+// 新增套票button
+const addTicketBtn = document.querySelector('.addTicket-btn');
+// 監聽事件
+addTicketBtn.addEventListener('click', addTicket);
+// 新增套票函式
+function addTicket() {
+  // 1. 防呆 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // 套票名稱alert
+  const ticketNameMessage = document.querySelector('#ticketName-message[data-message="套票名稱"]');
+  // 圖片網址alert
+  const ticketImgUrlMessage = document.querySelector('#ticketImgUrl-message[data-message="圖片網址"]');
+  // 景點地區alert
+  const ticketRegionMessage = document.querySelector('#ticketRegion-message[data-message="景點地區"]');
+  // 套票金額alert
+  const ticketPriceMessage = document.querySelector('#ticketPrice-message[data-message="套票金額"]');
+  // 套票組數alert
+  const ticketNumMessage = document.querySelector('#ticketNum-message[data-message="套票組數"]');
+  // 套票星級alert
+  const ticketRateMessage = document.querySelector('#ticketRate-message[data-message="套票星級"]');
+  // 套票描述alert
+  const ticketDescriptionMessage = document.querySelector('#ticketDescription-message[data-message="套票描述"]');
+  // 套票名稱防呆
+  if (ticketName.value === '') {
+    ticketNameMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else {
+    ticketNameMessage.innerHTML = '';
+  };
+  // 圖片網址防呆
+  if (ticketImgUrl.value === '') {
+    ticketImgUrlMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else {
+    ticketImgUrlMessage.innerHTML = '';
+  };
+  // 景點地區防呆
+  if (ticketRegion.value === '') {
+    ticketRegionMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else {
+    ticketRegionMessage.innerHTML = '';
+  };
+  // 套票金額防呆
+  if (ticketPrice.value === '') {
+    ticketPriceMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else {
+    ticketPriceMessage.innerHTML = '';
+  };
+  // 套票組數防呆
+  if (ticketNum.value === '') {
+    ticketNumMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else {
+    ticketNumMessage.innerHTML = '';
+  };
+  // 套票星級防呆
+  if (ticketRate.value === '') {
+    ticketRateMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else {
+    ticketRateMessage.innerHTML = '';
+  };
+  // 套票描述防呆
+  if (ticketDescription.value === '') {
+    ticketDescriptionMessage.innerHTML = `<i class="fas fa-exclamation-circle"></i><span>必填!</span>`;
+  } else {
+    ticketDescriptionMessage.innerHTML = '';
+  };
+  // 2. 資料建立 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+  // let obj = {};
+
+};
