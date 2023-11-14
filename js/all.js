@@ -175,14 +175,8 @@ function addTicket() {
     data.push(obj);
     // 初始化函式，在畫面上重新渲染將新資料新增上去
     init();
-    // 將輸入框清空
-    ticketName.value = '';
-    ticketImgUrl.value = '';
-    ticketRegion.value = '';
-    ticketDescription.value = '';
-    ticketNum.value = '';
-    ticketPrice.value = '';
-    ticketRate.value = '';
+    // 新增資料後可直接用 reset() 方法來清除表單內容
+    document.querySelector('.addTicket-form').reset();
   };
 };
 // 地區篩選功能
